@@ -13,10 +13,11 @@ import { Container, Image, User } from "./styles"
 const App = () => {
   const [users, setUsers] = useState([])
   const history = useHistory()
+  const baseUrl = "https://register-users-rosy.vercel.app"
 
   useEffect( () => {
     async function fetchUser() {
-    const {data: userRetrieve} = await axios.get("http://localhost:3001/user")
+    const {data: userRetrieve} = await axios.get(`${baseUrl}/user`)
 
     setUsers(userRetrieve) 
     }
@@ -26,7 +27,7 @@ const App = () => {
   }, [])
 
   async function deleteUser(userId) {
-    await axios.delete(`http://localhost:3001/user/${userId}`)
+    await axios.delete(`${baseUrl}/user/${userId}`)
     const newUsers = users.filter(user => user.id !== userId)
 
     setUsers(newUsers)
